@@ -74,3 +74,52 @@ This repo focuses on **linear chaining** only.
 
 - [LangChain LCEL](https://python.langchain.com/docs/concepts/lcel/) — composable pipelines in production
 - [OpenAI prompt engineering — decomposition](https://platform.openai.com/docs/guides/prompt-engineering)
+
+## Troubleshooting: "I can't add files"
+
+### 1. Open the repo root in Cursor
+
+Use **File → Open Folder** and choose:
+
+`.../Leaning/projects/prompt_chaining`
+
+If you open the parent `projects` folder, Source Control may not show this repo.
+
+### 2. Nothing new to add yet
+
+If `git status` says **working tree clean**, all tracked files are already committed. Create or edit a file, **save it**, then it will appear under Source Control.
+
+### 3. Some files are intentionally ignored
+
+These will **not** stage with `git add` (by design):
+
+| Path | Why |
+|------|-----|
+| `.env` | Secrets — never commit API keys |
+| `.venv/`, `venv/` | Local Python environment |
+| `__pycache__/`, `*.pyc` | Python cache |
+
+Check if a file is ignored:
+
+```bash
+git check-ignore -v path/to/your/file
+```
+
+Use `.env.example` for templates; copy to `.env` locally (not committed).
+
+### 4. Add and push a new file (terminal)
+
+```bash
+cd /path/to/prompt_chaining
+# create or edit a file, then:
+git add path/to/your_file.py
+git status          # should list "Changes to be committed"
+git commit -m "Add my new file"
+git push
+```
+
+### 5. GitHub website vs local Git
+
+Code is already on [GitHub](https://github.com/mulisriramreddy/prompt_chaining). Prefer editing locally and `git push`. If **Add file** on GitHub fails, sign in as the repo owner and ensure you are on the `main` branch.
+
+If you still see an error, note the **exact message** (Cursor popup, terminal, or GitHub) — that pinpoints the fix.
